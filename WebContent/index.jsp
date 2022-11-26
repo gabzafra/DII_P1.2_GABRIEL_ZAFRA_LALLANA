@@ -13,9 +13,6 @@
 		</head>
 
 		<body>
-			<c:if test="${!empty requestScope.error}">
-				<jsp:include page="/components/error-msj.jsp" />
-			</c:if>
 			<c:if test="${!empty requestScope.form}">
 				<jsp:include page="/components/contact-form.jsp" />
 			</c:if>
@@ -28,6 +25,20 @@
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 				integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 				crossorigin="anonymous"></script>
+			<script>
+				function sendDelete(url) {
+					let request = new XMLHttpRequest();
+					request.open("DELETE", url);
+					request.onreadystatechange = function () {
+						if (request.readyState == 4 && request.status == 200) {
+							window.location.reload();
+						} else if (request.readyState == 4 && request.status != 200) {
+							window.location.search = '?error=""';
+						}
+					}
+					request.send();
+				}
+			</script>
 		</body>
 
 		</html>

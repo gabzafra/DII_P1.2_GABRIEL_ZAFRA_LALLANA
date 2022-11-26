@@ -14,4 +14,8 @@ public class ContactoService {
   public List<Contacto> getAllContacts() {
     return DAO.getAllContacts();
   }
+
+  public boolean deleteContactoById(String id) {
+    return DAO.deleteContactById(id);
+  }
 }

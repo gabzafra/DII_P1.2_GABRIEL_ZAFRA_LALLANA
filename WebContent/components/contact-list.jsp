@@ -1,5 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div class="contact-list container">
+        <c:if test="${!empty param.error}">
+            <jsp:include page="/components/error-msj.jsp">
+                <jsp:param name="msj" value="Se ha producido un error al intentar eliminar el contacto." />
+            </jsp:include>
+        </c:if>
         <h1>Contactos <a href="" class="btn btn-success">Crear nuevo</a></h1>
         <c:forEach items="${requestScope.list}" var="contact">
             <div class="row align-items-center border p-2">
@@ -10,7 +15,8 @@
                     <a href="" class="btn btn-primary">Editar</a>
                 </div>
                 <div class="col-1">
-                    <a href="" type="button" class="btn btn-danger">Borrar</a>
+                    <button onclick="sendDelete('./contact?id=${contact.id}')" type="button"
+                        class="btn btn-danger">Borrar</button>
                 </div>
             </div>
         </c:forEach>

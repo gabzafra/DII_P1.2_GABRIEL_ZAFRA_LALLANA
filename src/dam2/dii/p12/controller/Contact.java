@@ -51,7 +51,13 @@ public class Contact extends HttpServlet {
 
   protected void doDelete(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // TODO Auto-generated method stub
+    response.setContentType("text/plain");
+    String id = request.getParameter("id");
+    if (!cService.deleteContactoById(id)) {
+      response.sendError(404);
+    } else {
+      response.setStatus(200);
+    }
   }
 
 }
