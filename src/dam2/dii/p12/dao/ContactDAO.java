@@ -58,7 +58,8 @@ public final class ContactDAO {
   }
 
   public Contacto getContactById(String id) {
-    return cloneContact(contactList.get(id));
+    Contacto foundContact = contactList.get(id);
+    return foundContact != null ? cloneContact(foundContact) : null;
   }
 
   public boolean deleteContactById(String id) {
