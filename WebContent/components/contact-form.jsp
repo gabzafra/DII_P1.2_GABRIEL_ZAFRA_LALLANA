@@ -16,13 +16,13 @@
             </div>
             <div class="form-floating mb-3">
                 <input type="number" class="form-control" id="phone" placeholder="TelÃ©fono" value="">
-                <label for="phone">TelÃ©fono</label>
+                <label for="phone">Teléfono</label>
             </div>
             <div class="form-floating mb-3">
                 <textarea class="form-control" id="coments" placeholder="Comentarios" value=""></textarea>
                 <label for="coments">Comentarios</label>
             </div>
-            <button type="submit" class="btn btn-primary">AÃ±adir</button>
+            <button type="submit" class="btn btn-primary">Añadir</button>
         </fieldset>
     </form>
 </div>
