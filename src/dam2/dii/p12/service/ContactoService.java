@@ -1,6 +1,7 @@
 package dam2.dii.p12.service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 import dam2.dii.p12.dao.ContactDAO;
 import dam2.dii.p12.model.Contacto;
 
@@ -18,4 +19,31 @@ public class ContactoService {
   public boolean deleteContactoById(String id) {
     return DAO.deleteContactById(id);
   }
+
+  public Contacto createContacto(Contacto contact) {
+    Contacto newContact = DAO.createContact(contact);
+    if (newContact != null) {
+      return newContact;
+    } else {
+      contact.setId("");
+      return contact;
+    }
+  }
+
+  public Contacto updateContacto(Contacto contact) {
+    Contacto newContact = DAO.updateContact(contact);
+    if (newContact != null) {
+      return newContact;
+    } else {
+      contact.setId("");
+      return contact;
+    }
+  }
+
+  public boolean validateEmail(Contacto contact) {
+    String regex =
+        "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+    return Pattern.compile(regex).matcher(contact.getEmail()).matches();
+  }
+
 }

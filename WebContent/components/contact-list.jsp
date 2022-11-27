@@ -5,14 +5,14 @@
                 <jsp:param name="msj" value="Se ha producido un error al intentar eliminar el contacto." />
             </jsp:include>
         </c:if>
-        <h1>Contactos <a href="" class="btn btn-success">Crear nuevo</a></h1>
+        <h1>Contactos</h1>
         <c:forEach items="${requestScope.list}" var="contact">
             <div class="row align-items-center border p-2">
                 <div class="col">
                     <a href="./contact?id=${contact.id}">${contact.name}</a>
                 </div>
                 <div class="col-1">
-                    <a href="" class="btn btn-primary">Editar</a>
+                    <a href="./contact?upd=${contact.id}" class="btn btn-primary">Editar</a>
                 </div>
                 <div class="col-1">
                     <button onclick="sendDelete('./contact?id=${contact.id}')" type="button"

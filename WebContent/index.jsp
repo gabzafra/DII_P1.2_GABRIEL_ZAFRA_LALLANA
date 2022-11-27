@@ -13,12 +13,12 @@
 		</head>
 
 		<body>
-			<c:if test="${!empty requestScope.form}">
-				<jsp:include page="/components/contact-form.jsp" />
-			</c:if>
-			<c:if test="${!empty requestScope.list}">
+		    <c:if test="${empty requestScope.detail}">
+                <jsp:include page="/components/contact-form.jsp" />
+            </c:if>
+ 			<c:if test="${!empty requestScope.list}">
 				<jsp:include page="/components/contact-list.jsp" />
-			</c:if>
+ 			</c:if>
 			<c:if test="${!empty requestScope.detail}">
 				<jsp:include page="/components/contact-detail.jsp" />
 			</c:if>
@@ -27,17 +27,19 @@
 				crossorigin="anonymous"></script>
 			<script>
 				function sendDelete(url) {
-					let request = new XMLHttpRequest();
-					request.open("DELETE", url);
-					request.onreadystatechange = function () {
-						if (request.readyState == 4 && request.status == 200) {
-							window.location.reload();
-						} else if (request.readyState == 4 && request.status != 200) {
-							window.location.search = '?error=""';
-						}
-					}
-					request.send();
+					console.log(url);
+					fetch(url, {method: 'DELETE'})
+				    .then(res => {
+				    	if (res.status == 200) {
+				    		window.location = window.location.pathname;
+                        } else {
+                            window.location.search = '?error=""';
+                        }
+				    });
 				}
+			    function sendPut(url) {
+			    	console.log("update baby")
+			    }
 			</script>
 		</body>
 

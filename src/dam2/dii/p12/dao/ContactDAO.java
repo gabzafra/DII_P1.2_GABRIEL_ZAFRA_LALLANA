@@ -49,7 +49,7 @@ public final class ContactDAO {
       contactList.put(contact.getId(), contact);
       return cloneContact(contactList.get(contact.getId()));
     } else {
-      return new Contacto();
+      return null;
     }
   }
 
