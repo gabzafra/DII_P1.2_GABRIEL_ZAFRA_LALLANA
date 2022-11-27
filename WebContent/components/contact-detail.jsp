@@ -2,7 +2,7 @@
     <article>
         <h1>${requestScope.detail.name} ${requestScope.detail.surnames}</h1>
         <p><span>Email: </span><a href="mailto:email@email.com">${requestScope.detail.email}</a></p>
-        <p><span>Tel�fono: </span>${requestScope.detail.phone}</p>
+        <p><span>Teléfono: </span>${requestScope.detail.phone}</p>
         <p>${requestScope.detail.coments}</p>
     </article>
     <a href="./contact" class="btn btn-primary">Volver</a>
