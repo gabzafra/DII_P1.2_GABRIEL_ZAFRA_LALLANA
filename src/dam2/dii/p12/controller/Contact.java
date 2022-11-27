@@ -16,7 +16,7 @@ import dam2.dii.p12.service.ContactoService;
 @MultipartConfig()
 public class Contact extends HttpServlet {
   private static final long serialVersionUID = 1L;
-  private static ContactoService cService;
+  private ContactoService cService;
 
   public Contact() {
     super();
@@ -73,7 +73,11 @@ public class Contact extends HttpServlet {
     Contacto contact = new Contacto(request.getParameter("upd"), request.getParameter("name"),
         request.getParameter("surnames"), request.getParameter("email"),
         request.getParameter("phone"), request.getParameter("coments"));
+
+    response.setContentType("aplication/json");
+    response.setCharacterEncoding("UTF-8");
     PrintWriter output = response.getWriter();
+
     if (contact.getEmail() != null && cService.validateEmail(contact)) {
       contact = cService.updateContacto(contact);
       if (!contact.getId().equals("")) {
@@ -85,8 +89,6 @@ public class Contact extends HttpServlet {
     } else {
       output.print("{\"error\":\"El email introducido no es válido.\"}");
     }
-    response.setContentType("aplication/json");
-    response.setCharacterEncoding("UTF-8");
     output.flush();
   }
 

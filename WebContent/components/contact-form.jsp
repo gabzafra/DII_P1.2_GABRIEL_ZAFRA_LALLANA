@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <div id="contact-form" class="contact container mx-auto m-3">
         <c:if test="${empty requestScope.update}">
@@ -29,7 +30,7 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" name="phone" placeholder="Teléfono"
+                    <input type="number" class="form-control" name="phone" placeholder="TelÃ©fono"
                         value="${requestScope.contact.phone}">
                     <label for="phone">Teléfono</label>
                 </div>
