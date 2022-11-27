@@ -1,8 +1,10 @@
 package dam2.dii.p12.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import dam2.dii.p12.model.Contacto;
 import dam2.dii.p12.service.ContactoService;
 
 @WebServlet("/contact")
+@MultipartConfig()
 public class Contact extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private static ContactoService cService;
@@ -67,7 +70,24 @@ public class Contact extends HttpServlet {
 
   protected void doPut(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    // TODO Auto-generated method stub
+    Contacto contact = new Contacto(request.getParameter("upd"), request.getParameter("name"),
+        request.getParameter("surnames"), request.getParameter("email"),
+        request.getParameter("phone"), request.getParameter("coments"));
+    PrintWriter output = response.getWriter();
+    if (contact.getEmail() != null && cService.validateEmail(contact)) {
+      contact = cService.updateContacto(contact);
+      if (!contact.getId().equals("")) {
+        output.print("{\"error\":\"\"}");
+      } else {
+        output
+            .print("{\"error\":\"Se ha producido un error al intentar actualizar el contacto.\"}");
+      }
+    } else {
+      output.print("{\"error\":\"El email introducido no es válido.\"}");
+    }
+    response.setContentType("aplication/json");
+    response.setCharacterEncoding("UTF-8");
+    output.flush();
   }
 
   protected void doDelete(HttpServletRequest request, HttpServletResponse response)

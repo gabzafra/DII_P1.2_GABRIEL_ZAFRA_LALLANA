@@ -4,7 +4,7 @@
             <form action="<%=request.getContextPath()%>/contact" method="POST">
         </c:if>
         <c:if test="${!empty requestScope.update}">
-            <form onsubmit="event.preventDefault(); sendPut(this)" action="<%=request.getContextPath()%>/contact?id=${requestScope.contact.id}" method="POST">
+            <form onsubmit="event.preventDefault(); sendPut(this)" action="<%=request.getContextPath()%>/contact?upd=${requestScope.contact.id}" method="POST">
         </c:if>
             <fieldset>
                 <c:if test="${empty requestScope.update}">
@@ -50,6 +50,7 @@
                 </c:if>
             </fieldset>
         </form>
+        <p>${param.error}</p>
         <c:if test="${!empty requestScope.error}">
             <jsp:include page="/components/error-msj.jsp">
                 <jsp:param name="msj" value="${requestScope.error}" />
