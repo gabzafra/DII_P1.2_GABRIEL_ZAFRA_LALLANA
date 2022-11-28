@@ -21,7 +21,10 @@ public class ContactoService {
   }
 
   public Contacto createContacto(Contacto contact) {
-    Contacto newContact = DAO.createContact(contact);
+    Contacto newContact = null;
+    if (!hasEmptyFields(contact)) {
+      newContact = DAO.createContact(contact);
+    }
     if (newContact != null) {
       return newContact;
     } else {
@@ -30,8 +33,16 @@ public class ContactoService {
     }
   }
 
+  private boolean hasEmptyFields(Contacto c) {
+    return c.getName().equals("") || c.getSurnames().equals("") || c.getEmail().equals("")
+        || c.getPhone().equals("") || c.getComents().equals("");
+  }
+
   public Contacto updateContacto(Contacto contact) {
-    Contacto newContact = DAO.updateContact(contact);
+    Contacto newContact = null;
+    if (!hasEmptyFields(contact)) {
+      newContact = DAO.createContact(contact);
+    }
     if (newContact != null) {
       return newContact;
     } else {
