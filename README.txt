@@ -33,7 +33,7 @@ Controlador:
 
 El servlet Contact.java mapea la url /contact y responde a peticiones GET, POST, PUT y DELETE del front. Al instanciarse obtiene un ContactoService cService que utiliza para llenar de datos las respuestas.
 - doGet actua normalmente recibiendo requests, añadiendo atributos y haciendo forward.
-- doPost tiene la particularidad de valerse de goGet para la respuesta y así actualizar la vista de la lista de usuarios.
+- doPost tiene la particularidad de valerse de doGet para la respuesta y así actualizar la vista de la lista de usuarios.
 - doPut recibe un FormData de una request de JS (con los datos actualizados ) y el id por parámetro (“upd”). Devuelve un JSON con un atributo error que está vacio si no hay problema y con un mensaje si lo hay.
 - doDelete recibe un parámetro id con el id del contacto a eliminar y devuelve un 200 si tiene éxito o 404 si falla.
 
