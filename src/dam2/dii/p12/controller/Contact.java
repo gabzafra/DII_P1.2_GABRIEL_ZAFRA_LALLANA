@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import dam2.dii.p12.WebConfig;
 import dam2.dii.p12.model.Contacto;
 import dam2.dii.p12.service.ContactoService;
 
@@ -17,14 +18,26 @@ import dam2.dii.p12.service.ContactoService;
 public class Contact extends HttpServlet {
   private static final long serialVersionUID = 1L;
   private ContactoService cService;
+  private final WebConfig WEB_CONFIG = WebConfig.getConfig();
 
   public Contact() {
     super();
-    this.cService = new ContactoService();
+  }
+
+  private void initBackServices(HttpServletRequest request) {
+    if (WEB_CONFIG.getGlobalPath() == null) {
+      WEB_CONFIG.setGlobalPath(request.getServletContext().getRealPath(""));
+    }
+    if (cService == null) {
+      cService = new ContactoService();
+    }
   }
 
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    initBackServices(request);
+
     String id = request.getParameter("id");
     String updId = request.getParameter("upd");
     if (updId != null) {
@@ -53,6 +66,9 @@ public class Contact extends HttpServlet {
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    initBackServices(request);
+
     Contacto contact = new Contacto(request.getParameter("name"), request.getParameter("surnames"),
         request.getParameter("email"), request.getParameter("phone"),
         request.getParameter("coments"));
@@ -70,6 +86,9 @@ public class Contact extends HttpServlet {
 
   protected void doPut(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    initBackServices(request);
+
     Contacto contact = new Contacto(request.getParameter("upd"), request.getParameter("name"),
         request.getParameter("surnames"), request.getParameter("email"),
         request.getParameter("phone"), request.getParameter("coments"));
@@ -94,6 +113,9 @@ public class Contact extends HttpServlet {
 
   protected void doDelete(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
+
+    initBackServices(request);
+
     response.setContentType("text/plain");
     String id = request.getParameter("id");
     if (!cService.deleteContactoById(id)) {

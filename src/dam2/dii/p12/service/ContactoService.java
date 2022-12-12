@@ -3,10 +3,12 @@ package dam2.dii.p12.service;
 import java.util.List;
 import java.util.regex.Pattern;
 import dam2.dii.p12.dao.ContactDAO;
+import dam2.dii.p12.dao.ContactDAOXml;
 import dam2.dii.p12.model.Contacto;
 
 public class ContactoService {
-  private ContactDAO DAO = ContactDAO.getInstance();
+  // private ContactDAO DAO = ContactDAOinMem.getInstance();
+  private ContactDAO DAO = ContactDAOXml.getInstance();
 
   public Contacto getContactoById(String id) {
     return DAO.getContactById(id);
